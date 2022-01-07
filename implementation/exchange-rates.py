@@ -3,7 +3,7 @@
 def main():
 
     exchanges = [["GBP","USD",1.3572132],["GBP","EUR",1.196638],["JPY","USD",0.0086445116]];
-    currencyFrom = "EUT";
+    currencyFrom = "EUR";
     currencyTo = "JPY";
 
     exchange = findExchange(exchanges,currencyFrom,currencyTo);
