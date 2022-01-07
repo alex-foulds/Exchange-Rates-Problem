@@ -6,9 +6,10 @@ def main():
     currencyFrom = "EUR";
     currencyTo = "JPY";
 
-    print(findExchange(exchanges,currencyFrom,currencyTo));
+    print("Exchange Rate from {} to {} is: {}".format(currencyFrom, currencyTo,findExchange(exchanges,currencyFrom,currencyTo)));
 
-def findExchange(exchanges, currencyFrom, currencyTo):
+def findExchange(exchanges, currencyFrom, currencyTo, avoidRepeat=None):
+    #adding avoidRepeat to skip past troublesome exchanges which leads to recursion error
     
     for exchange in exchanges:
 
@@ -18,8 +19,8 @@ def findExchange(exchanges, currencyFrom, currencyTo):
                 return exchange[2];
             
             #If the exchange exists. Call to see if 'new currency' can exchange to currencyTo
-            else:
-                return exchange[2]*findExchange(exchanges,exchange[1],currencyTo);
+            elif exchange[1]!=avoidRepeat:
+                return exchange[2]*findExchange(exchanges,exchange[1],currencyTo, exchange[0]);
 
         elif currencyFrom == exchange[1]:
             #If the exchange rate exists, but reversed, in the list
@@ -27,9 +28,7 @@ def findExchange(exchanges, currencyFrom, currencyTo):
                 return 1/exchange[2];
 
             #If the exchange exists reversed. Call to see if 'new currency' can exchange to currencyTo
-            else:
-                return (1/exchange[2])*findExchange(exchanges,exchange[0], currencyTo);
-        
-        else:
-            print("Error, exchange rate does not exist in exchanges -", currencyFrom);
+            elif exchange[0]!=avoidRepeat:
+                return (1/exchange[2])*findExchange(exchanges,exchange[0], currencyTo, exchange[1]);
+
 main();
