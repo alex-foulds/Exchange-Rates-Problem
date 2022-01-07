@@ -25,6 +25,9 @@ def findExchange(exchanges, currencyFrom, currencyTo, avoidRepeat=None):
             elif exchange[1]!=avoidRepeat:
                 return exchange[2]*findExchange(exchanges,exchange[1],currencyTo, exchange[0]);
             
+            elif exchange[1]==avoidRepeat:
+                continue;
+
             else:
                 #If currency combination is not found
                 return False;
@@ -38,6 +41,9 @@ def findExchange(exchanges, currencyFrom, currencyTo, avoidRepeat=None):
             elif exchange[0]!=avoidRepeat:
                 return (1/exchange[2])*findExchange(exchanges,exchange[0], currencyTo, exchange[1]);
             
+            elif exchange[0]==avoidRepeat:
+                continue;
+
             else:
                 #If currency combination is not found
                 return False;
