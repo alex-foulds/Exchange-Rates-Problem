@@ -17,7 +17,6 @@ def findExchange(exchanges, currencyFrom, currencyTo, avoidRepeat=None):
     for exchange in exchanges:
 
         if currencyFrom == exchange[0]:
-            flagFromError = False;
             #If the exchange rate exists perfectly in the list
             if currencyTo == exchange[1]:
                 return exchange[2];
@@ -31,7 +30,6 @@ def findExchange(exchanges, currencyFrom, currencyTo, avoidRepeat=None):
                 return False;
 
         elif currencyFrom == exchange[1]:
-            flagFromError = False;
             #If the exchange rate exists, but reversed, in the list
             if currencyTo == exchange[0]:
                 return 1/exchange[2];
